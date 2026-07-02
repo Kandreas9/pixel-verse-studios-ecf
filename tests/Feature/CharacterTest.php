@@ -14,7 +14,7 @@ use function Pest\Laravel\post;
 
 beforeEach(function () {
     $this->user = User::factory()->create();
-    $this->actingAs($this->user);
+    actingAs($this->user);
 });
 
 it('can render shared characters page', function () {
