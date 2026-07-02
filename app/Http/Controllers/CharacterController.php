@@ -9,9 +9,14 @@ class CharacterController extends Controller
 {
     public function index(Request $request)
     {
-        $characters = $request->user()->characters;
+        $characters = Character::where('isShared', true)->get();
 
-        return inertia('MyCharacters', ['characters' => $characters->toArray()]);
+        return inertia('Characters', ['characters' => $characters->toArray()]);
+    }
+
+    public function create(Request $request)
+    {
+        return inertia('CharacterCreate');
     }
 
     public function store(Request $request)
@@ -21,9 +26,29 @@ class CharacterController extends Controller
         Character::create([
             'user_id' => $request->user()->id,
             'name' => $request->input('name'),
+            'gender' => $request->input('gender'),
+            'skin_color' => $request->input('skin_color'),
+            'eye_color' => $request->input('eye_color'),
+            'eye_shape' => $request->input('eye_shape'),
+            'hair_color' => $request->input('hair_color'),
+            'nose_color' => $request->input('nose_color'),
+            'mouth_color' => $request->input('mouth_color'),
+            'isShared' => $request->input('isShared'),
+            'isAuthorized' => $request->input('isAuthorized'),
+
         ]);
 
         return redirect('/');
+    }
+
+    public function show(Request $request, Character $character)
+    {
+        return inertia('CharacterDetail', ['character' => $character]);
+    }
+
+    public function edit(Request $request)
+    {
+        return inertia('CharacterEdit');
     }
 
     public function update(Request $request, Character $character)

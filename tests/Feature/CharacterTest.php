@@ -34,12 +34,12 @@ it('can render character creation form', function () {
 });
 
 it('can be created by user', function () {
-    post('/characters', [
-        'name' => 'john',
-    ])->assertRedirect();
+    $character = Character::factory()->for($this->user)->make();
+
+    post('/characters', $character->toArray())->assertRedirect();
 
     assertDatabaseHas('characters', [
-        'name' => 'john',
+        'name' => $character->name,
         'user_id' => $this->user->id,
     ]);
 });
@@ -58,7 +58,7 @@ it('can be viewed by user', function () {
 */
 
 it('can render character detail page', function () {
-    $character = Character::factory()->for($this->user)->create(['name' => 'john']);
+    $character = Character::factory()->for($this->user)->create();
 
     get("/characters/{$character->id}")
         ->assertStatus(200)
@@ -69,7 +69,7 @@ it('can render character detail page', function () {
 });
 
 it('can render character edit form', function () {
-    $character = Character::factory()->for($this->user)->create(['name' => 'john']);
+    $character = Character::factory()->for($this->user)->create();
 
     get("/characters/{$character->id}/edit")
         ->assertStatus(200)
@@ -80,7 +80,7 @@ it('can render character edit form', function () {
 });
 
 it('can be edited by user', function () {
-    $character = Character::factory()->for($this->user)->create(['name' => 'john']);
+    $character = Character::factory()->for($this->user)->create();
 
     patch("/characters/{$character->id}", [
         'name' => 'mark',
@@ -94,7 +94,7 @@ it('can be edited by user', function () {
 });
 
 it('can only be edited by user who created character', function () {
-    $character = Character::factory()->for($this->user)->create(['name' => 'john']);
+    $character = Character::factory()->for($this->user)->create();
 
     $otherUser = User::factory()->create();
 
@@ -106,7 +106,7 @@ it('can only be edited by user who created character', function () {
 });
 
 it('can be deleted by user', function () {
-    $character = Character::factory()->for($this->user)->create(['name' => 'john']);
+    $character = Character::factory()->for($this->user)->create();
 
     delete("/characters/{$character->id}")
         ->assertRedirect();
@@ -115,7 +115,7 @@ it('can be deleted by user', function () {
 });
 
 it('can only be deleted by user who created character', function () {
-    $character = Character::factory()->for($this->user)->create(['name' => 'john']);
+    $character = Character::factory()->for($this->user)->create();
 
     $otherUser = User::factory()->create();
 
