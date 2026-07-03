@@ -99,6 +99,7 @@
     --main-dark-color: oklch(0.205 0 0);
     --main-light-color: #252525;
     --main-lighter-color: #2b2b2b;
+    --main-text-light: #c4c4c4;
 }
 
 .dark {
