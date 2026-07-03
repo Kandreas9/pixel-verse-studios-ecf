@@ -4,7 +4,7 @@ use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\ItemController;
 use Illuminate\Support\Facades\Route;
 
-Route::inertia('/', 'welcome')->name('home');
+Route::inertia('/', 'Homepage')->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('dashboard', 'dashboard')->name('dashboard');
