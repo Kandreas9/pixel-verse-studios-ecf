@@ -1,7 +1,14 @@
+import { Link } from '@inertiajs/react';
+
 export function AppFooter() {
     return (
-        <footer className="flex h-16 items-center border-t border-sidebar-border/80 bg-[var(--main-dark-color)] px-4">
-            PixelVerse Studios Footer
+        <footer className="flex h-24 items-center justify-between border-t border-sidebar-border/80 bg-[var(--main-dark-color)] px-4">
+            <h2>PixelVerse Studios</h2>
+
+            <div className="flex flex-col space-y-4">
+                <Link href={'/terms-and-service'}>Terms and Service</Link>
+                <Link href={'/legal-notice'}>Legal Notice</Link>
+            </div>
         </footer>
     );
 }
