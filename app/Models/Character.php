@@ -14,6 +14,11 @@ class Character extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function items()
     {
         return $this->belongsToMany(Item::class);

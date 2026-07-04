@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('hair_color', 50);
             $table->string('nose_color', 50);
             $table->string('mouth_color', 50);
-            $table->boolean('isShared');
-            $table->boolean('isAuthorized');
+            $table->boolean('isShared')->default(false);
+            $table->boolean('isAuthorized')->default(false);
         });
     }
 
