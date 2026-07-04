@@ -87,14 +87,8 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                     <div className="ml-6 hidden h-full items-center space-x-6 lg:flex">
                         <NavigationMenu className="flex h-full items-stretch">
                             <NavigationMenuList className="flex h-full items-stretch space-x-2">
-                                {mainNavItems.map((item, index) => {
-                                    if (
-                                        !auth.user &&
-                                        item.title == 'Characters'
-                                    ) {
-                                        return;
-                                    }
-                                    return (
+                                {auth.user &&
+                                    mainNavItems.map((item, index) => (
                                         <NavigationMenuItem
                                             key={index}
                                             className="relative flex h-full items-center"
@@ -119,8 +113,7 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                                                 <div className="absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-black dark:bg-white"></div>
                                             )}
                                         </NavigationMenuItem>
-                                    );
-                                })}
+                                    ))}
                             </NavigationMenuList>
                         </NavigationMenu>
                     </div>
