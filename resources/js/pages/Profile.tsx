@@ -31,9 +31,7 @@ export default function Profile() {
                     <h2 className="text-lg font-bold">Created Characters</h2>
                     <Link
                         className="cursor-pointer rounded bg-green-400 px-2 py-1"
-                        href={'/'}
-                        as="button"
-                        onClick={() => console.log('test')}
+                        href={'/characters/create'}
                     >
                         <Plus />
                     </Link>
