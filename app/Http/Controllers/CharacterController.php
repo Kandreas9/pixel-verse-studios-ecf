@@ -43,7 +43,10 @@ class CharacterController extends Controller
 
     public function show(Request $request, Character $character)
     {
-        return inertia('CharacterDetail', ['character' => $character]);
+        return inertia('character/Detail', [
+            'character' => $character,
+            'comments' => $character->comments,
+        ]);
     }
 
     public function edit(Request $request)

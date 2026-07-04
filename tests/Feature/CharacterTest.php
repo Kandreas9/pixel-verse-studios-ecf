@@ -58,13 +58,14 @@ it('can be viewed by user', function () {
 */
 
 it('can render character detail page', function () {
-    $character = Character::factory()->for($this->user)->create();
+    $character = Character::factory()->for($this->user)->hasComments(3)->create();
 
     get("/characters/{$character->id}")
         ->assertStatus(200)
         ->assertInertia(fn (AssertableInertia $page) => $page
-            ->component('CharacterDetail')
+            ->component('character/Detail')
             ->has('character')
+            ->has('comments')
         );
 });
 
