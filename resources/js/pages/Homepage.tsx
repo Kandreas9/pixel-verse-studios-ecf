@@ -1,10 +1,18 @@
 import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import { register } from '@/routes';
-import { Link } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 
 export default function Homepage() {
     return (
         <>
+            <Head>
+                <title>PixelVerse Studios Home</title>
+                <meta
+                    name="description"
+                    content="Find out about FantasyRealm MMORPGs character creator."
+                />
+            </Head>
+
             <div className="flex flex-col items-center gap-[1rem] px-4 py-[3rem] md:flex-row md:justify-center">
                 <div className="relative aspect-video h-[8rem] w-[13rem] overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
                     <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
@@ -23,7 +31,6 @@ export default function Homepage() {
                     </Link>
                 </div>
             </div>
-
             <div className="flex flex-col items-center gap-[1rem] px-4 pb-[3rem]">
                 <p className="text-center text-[var(--main-text-light)] md:max-w-[25rem]">
                     FantasyRealm Online is an MMORPG, it offers a rich story
@@ -41,7 +48,6 @@ export default function Homepage() {
                     </div>
                 </div>
             </div>
-
             <div className="flex flex-col items-center gap-[1rem] px-4 pb-[3rem]">
                 <p className="text-center text-[var(--main-text-light)] md:max-w-[25rem]">
                     This website offers extra customisation for even better and

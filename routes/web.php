@@ -1,10 +1,13 @@
 <?php
 
 use App\Http\Controllers\CharacterController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ItemController;
 use Illuminate\Support\Facades\Route;
 
 Route::inertia('/', 'Homepage')->name('home');
+Route::inertia('/contact', 'Contact');
+Route::post('/contact', ContactController::class);
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('dashboard', 'dashboard')->name('dashboard');
