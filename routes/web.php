@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CharacterController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ItemController;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +38,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::delete('/items/{item}', 'destroy');
             });
         });
+    });
+
+    Route::controller(CommentController::class)->group(function () {
+        Route::prefix('characters')->group(function () {
+            Route::post('/{character}/comments', 'store');
+        });
+
+        Route::patch('/comments/{comment}/approve', 'approve');
+        Route::patch('/comments/{comment}/reject', 'reject');
     });
 });
 
