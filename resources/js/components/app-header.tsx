@@ -147,16 +147,8 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                                     <div className="flex h-full flex-1 flex-col space-y-4 p-4">
                                         <div className="flex h-full flex-col justify-between text-sm">
                                             <div className="flex flex-col space-y-4">
-                                                {mainNavItems.map((item) => {
-                                                    if (
-                                                        !auth.user &&
-                                                        item.title ==
-                                                            'Characters'
-                                                    ) {
-                                                        return;
-                                                    }
-
-                                                    return (
+                                                {auth.user &&
+                                                    mainNavItems.map((item) => (
                                                         <Link
                                                             key={item.title}
                                                             href={item.href}
@@ -169,8 +161,7 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                                                                 {item.title}
                                                             </span>
                                                         </Link>
-                                                    );
-                                                })}
+                                                    ))}
                                             </div>
                                             {!auth.user && (
                                                 <div className="flex flex-col space-y-4">
