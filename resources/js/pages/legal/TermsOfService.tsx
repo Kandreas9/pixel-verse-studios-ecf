@@ -4,9 +4,9 @@ export default function TermsOfService() {
     return (
         <>
             <Head>
-                <title>Privacy Policy</title>
+                <title>Terms of Service</title>
                 <meta
-                    name="Terms of Service"
+                    name="description"
                     content="Pixel Verse Studios Terms of Service"
                 />
             </Head>
