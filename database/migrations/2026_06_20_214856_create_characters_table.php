@@ -15,7 +15,16 @@ return new class extends Migration
         Schema::create('characters', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->constrained()->onDelete('cascade');
-            $table->string('name', 50);
+            $table->string('name', 50)->unique();
+            $table->string('gender', 50);
+            $table->string('skin_color', 50);
+            $table->string('eye_color', 50);
+            $table->string('eye_shape', 50);
+            $table->string('hair_color', 50);
+            $table->string('nose_shape', 50);
+            $table->string('mouth_shape', 50);
+            $table->boolean('is_shared')->default(false);
+            $table->boolean('is_approved')->default(false);
             $table->timestamps();
         });
     }

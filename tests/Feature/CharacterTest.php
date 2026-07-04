@@ -29,7 +29,7 @@ it('can render character creation form', function () {
     get('/characters/create')
         ->assertStatus(200)
         ->assertInertia(fn (AssertableInertia $page) => $page
-            ->component('CharacterCreate')
+            ->component('character/Create')
         );
 });
 

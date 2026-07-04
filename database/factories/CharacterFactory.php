@@ -26,10 +26,10 @@ class CharacterFactory extends Factory
             'eye_color' => fake()->text(50),
             'eye_shape' => fake()->text(50),
             'hair_color' => fake()->text(50),
-            'nose_color' => fake()->text(50),
-            'mouth_color' => fake()->text(50),
-            'isShared' => fake()->boolean(),
-            'isAuthorized' => fake()->boolean(),
+            'nose_shape' => fake()->text(50),
+            'mouth_shape' => fake()->text(50),
+            'is_shared' => fake()->boolean(),
+            'is_approved' => fake()->boolean(),
         ];
     }
 }
