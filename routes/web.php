@@ -7,6 +7,7 @@ use App\Http\Controllers\ItemController;
 use Illuminate\Support\Facades\Route;
 
 Route::inertia('/', 'Homepage')->name('home');
+Route::inertia('/terms', 'legal/TermsOfService');
 Route::inertia('/privacy', 'legal/PrivacyPolicy');
 
 Route::middleware(['auth', 'verified'])->group(function () {
