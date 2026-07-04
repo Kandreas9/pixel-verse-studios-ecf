@@ -11,12 +11,12 @@ export default function PrivacyPolicy() {
                 />
             </Head>
 
-            <div className="my-8 flex flex-col px-4">
+            <div className="legal my-8 flex flex-col px-4">
+                <h1 className="mb-[2rem] text-[1.5rem] font-bold">
+                    Privacy Policy - Pixel Verse Studios
+                </h1>
+                <p>Effective Date: 7/4/2026</p>
                 <section>
-                    <h1 className="mb-[2rem] text-[1.5rem] font-bold">
-                        Privacy Policy - Pixel Verse Studios
-                    </h1>
-                    <p>Effective Date: 7/4/2026</p>
                     <h2 className="my-[1.5rem] text-[1.2rem] font-bold">
                         1. Introduction
                     </h2>

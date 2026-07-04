@@ -146,3 +146,23 @@
         @apply bg-background text-foreground;
     }
 }
+
+.legal h1 {
+    font-size: 1.25rem;
+}
+
+.legal h2 {
+    font-size: 1.125rem;
+}
+
+.legal h3 {
+    font-size: 1.125rem;
+}
+
+.legal p {
+    color: var(--main-text-light);
+}
+
+.legal li {
+    color: var(--main-text-light);
+}

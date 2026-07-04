@@ -6,7 +6,7 @@ export function AppFooter() {
             <h2>PixelVerse Studios</h2>
 
             <div className="flex flex-col space-y-4">
-                <Link href={'/terms-and-service'}>Terms and Service</Link>
+                <Link href={'/terms'}>Terms and Service</Link>
                 <Link href={'/privacy'}>Privacy Policy</Link>
             </div>
         </footer>
