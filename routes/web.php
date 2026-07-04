@@ -14,8 +14,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('/contact', 'Contact');
     Route::post('/contact', ContactController::class);
 
-    Route::inertia('dashboard', 'dashboard')->name('dashboard');
+    Route::inertia('/profile', 'Profile');
 
+    Route::inertia('dashboard', 'dashboard')->name('dashboard');
     Route::inertia('/dashboard/items', 'dashboard')->middleware('role:Moderator|Super-Admin');
 
     // Character Routes

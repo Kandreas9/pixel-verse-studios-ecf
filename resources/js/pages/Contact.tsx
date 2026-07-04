@@ -1,12 +1,10 @@
-import AppLogoIcon from '@/components/app-logo-icon';
 import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
 import { TextArea } from '@/components/ui/text-area';
-import { home } from '@/routes';
-import { Form, Head, Link, usePage } from '@inertiajs/react';
+import { Form, Head, usePage } from '@inertiajs/react';
 
 export default function Contact() {
     const { auth } = usePage().props;
