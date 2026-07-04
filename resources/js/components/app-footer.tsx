@@ -7,7 +7,7 @@ export function AppFooter() {
 
             <div className="flex flex-col space-y-4">
                 <Link href={'/terms-and-service'}>Terms and Service</Link>
-                <Link href={'/legal-notice'}>Legal Notice</Link>
+                <Link href={'/privacy'}>Privacy Policy</Link>
             </div>
         </footer>
     );
