@@ -1,5 +1,5 @@
 import { Link, router } from '@inertiajs/react';
-import { LogOut, Settings, User as UserIcon } from 'lucide-react';
+import { LogOut, Settings, User as UserIcon, LayoutGrid } from 'lucide-react';
 import {
     DropdownMenuGroup,
     DropdownMenuItem,
@@ -16,7 +16,7 @@ type Props = {
     user: User;
 };
 
-export function UserMenuContent({ user }: Props) {
+export function UserMenuContent({ roles, user }: Props) {
     const cleanup = useMobileNavigation();
 
     const handleLogout = () => {
@@ -35,6 +35,28 @@ export function UserMenuContent({ user }: Props) {
                     />
                 </div>
             </DropdownMenuLabel>
+
+            {roles.includes('Moderator') || roles.includes('Super-Admin') ? (
+                <>
+                    <DropdownMenuSeparator />
+
+                    <DropdownMenuGroup>
+                        <DropdownMenuItem asChild>
+                            <Link
+                                className="block w-full cursor-pointer"
+                                href="/dashboard"
+                                prefetch
+                                onClick={cleanup}
+                            >
+                                <LayoutGrid className="mr-2" />
+                                Dashboard
+                            </Link>
+                        </DropdownMenuItem>
+                    </DropdownMenuGroup>
+                </>
+            ) : (
+                ''
+            )}
 
             <DropdownMenuSeparator />
 
