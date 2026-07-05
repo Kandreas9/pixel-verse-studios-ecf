@@ -124,3 +124,21 @@ it('can only be deleted by user who created character', function () {
         ->delete("/characters/{$character->id}")
         ->assertForbidden();
 });
+
+it('can be shared by user', function () {
+    $character = Character::factory()->for($this->user)->create([
+        'is_shared' => false,
+    ]);
+
+    patch("/characters/{$character->id}/share")
+        ->assertRedirect();
+});
+
+it('can be unshared by user', function () {
+    $character = Character::factory()->for($this->user)->create([
+        'is_shared' => true,
+    ]);
+
+    patch("/characters/{$character->id}/unshare")
+        ->assertRedirect();
+});
