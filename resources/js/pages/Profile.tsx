@@ -1,10 +1,11 @@
+import CharacterList from '@/components/character/CharacterList';
 import { UserInfo } from '@/components/user-info';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { Plus } from 'lucide-react';
 
-export default function Profile() {
+export default function Profile({ characters }) {
     const { auth } = usePage().props;
-
+    console.log('character', characters);
     return (
         <>
             <Head>
@@ -27,7 +28,7 @@ export default function Profile() {
                     />
                 </div>
 
-                <div className="flex items-center justify-between">
+                <div className="mb-[2rem] flex items-center justify-between">
                     <h2 className="text-lg font-bold">Created Characters</h2>
                     <Link
                         className="cursor-pointer rounded bg-green-400 px-2 py-1"
@@ -36,6 +37,8 @@ export default function Profile() {
                         <Plus />
                     </Link>
                 </div>
+
+                <CharacterList user={auth.user} characters={characters} />
             </div>
         </>
     );
