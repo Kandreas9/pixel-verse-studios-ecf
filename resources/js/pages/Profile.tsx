@@ -5,7 +5,7 @@ import { Plus } from 'lucide-react';
 
 export default function Profile({ characters }) {
     const { auth } = usePage().props;
-    console.log('character', characters);
+
     return (
         <>
             <Head>

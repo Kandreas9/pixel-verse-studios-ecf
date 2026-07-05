@@ -24,7 +24,7 @@ class CharacterSeeder extends Seeder
             'hair_color' => 'test',
             'nose_shape' => 'test',
             'mouth_shape' => 'test',
-            'is_shared' => false,
+            'is_shared' => true,
             'is_approved' => true,
         ]);
 
@@ -40,6 +40,21 @@ class CharacterSeeder extends Seeder
             'is_shared' => false,
             'is_approved' => false,
 
+        ]);
+
+        $admin = User::where('email', 'admin@example.com')->first();
+
+        Character::factory()->for($admin)->create([
+            'name' => 'Admin Char',
+            'gender' => 'test',
+            'skin_color' => 'test',
+            'eye_color' => 'test',
+            'eye_shape' => 'test',
+            'hair_color' => 'test',
+            'nose_shape' => 'test',
+            'mouth_shape' => 'test',
+            'is_shared' => true,
+            'is_approved' => true,
         ]);
 
     }

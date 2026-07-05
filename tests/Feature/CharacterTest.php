@@ -21,7 +21,7 @@ it('can render shared characters page', function () {
     get('/characters')
         ->assertStatus(200)
         ->assertInertia(fn (AssertableInertia $page) => $page
-            ->component('Characters')
+            ->component('character/Shared')
         );
 });
 
