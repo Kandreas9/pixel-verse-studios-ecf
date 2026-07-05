@@ -19,9 +19,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return inertia('Profile', ['characters' => $request->user()->characters]);
     });
 
-    Route::inertia('dashboard', 'dashboard')->name('dashboard');
-    Route::inertia('/dashboard/items', 'dashboard')->middleware('role:Moderator|Super-Admin');
-
     // Character Routes
     Route::controller(CharacterController::class)->group(function () {
         Route::get('/characters', 'index');
@@ -47,6 +44,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::patch('/items/{item}', 'update');
                 Route::delete('/items/{item}', 'destroy');
             });
+
+            Route::inertia('/', 'dashboard/Index');
         });
     });
 
