@@ -4,6 +4,7 @@ use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ItemController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::inertia('/', 'Homepage')->name('home');
@@ -14,7 +15,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('/contact', 'Contact');
     Route::post('/contact', ContactController::class);
 
-    Route::inertia('/profile', 'Profile');
+    Route::get('/profile', function (Request $request) {
+        return inertia('Profile', ['characters' => $request->user()->characters]);
+    });
 
     Route::inertia('dashboard', 'dashboard')->name('dashboard');
     Route::inertia('/dashboard/items', 'dashboard')->middleware('role:Moderator|Super-Admin');
@@ -28,6 +31,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/characters/{character}/edit', 'edit');
         Route::patch('/characters/{character}', 'update');
         Route::delete('/characters/{character}', 'destroy');
+
+        Route::patch('/characters/{character}/share', 'share');
+        Route::patch('/characters/{character}/unshare', 'unshare');
     });
 
     Route::prefix('dashboard')->group(function () {

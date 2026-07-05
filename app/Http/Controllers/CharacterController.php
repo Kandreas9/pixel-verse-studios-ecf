@@ -73,6 +73,26 @@ class CharacterController extends Controller
     {
         $character->delete();
 
-        return redirect('/');
+        return redirect('/profile');
+    }
+
+    public function share(Character $character)
+    {
+
+        $character->update([
+            'is_shared' => true,
+        ]);
+
+        return back();
+    }
+
+    public function unshare(Character $character)
+    {
+
+        $character->update([
+            'is_shared' => false,
+        ]);
+
+        return back();
     }
 }
