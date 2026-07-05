@@ -196,7 +196,10 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                                     align="end"
                                 >
                                     {auth.user && (
-                                        <UserMenuContent user={auth.user} />
+                                        <UserMenuContent
+                                            roles={auth.roles}
+                                            user={auth.user}
+                                        />
                                     )}
                                 </DropdownMenuContent>
                             </DropdownMenu>

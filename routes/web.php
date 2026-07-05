@@ -3,6 +3,7 @@
 use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ItemController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::patch('/characters/{character}/share', 'share');
         Route::patch('/characters/{character}/unshare', 'unshare');
+
+        Route::patch('/characters/{character}/approve', 'approve')->middleware(['role:Moderator|Super-Admin']);
+        Route::delete('/characters/{character}/reject', 'reject')->middleware(['role:Moderator|Super-Admin']);
     });
 
     Route::prefix('dashboard')->group(function () {
@@ -45,7 +49,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::delete('/items/{item}', 'destroy');
             });
 
-            Route::inertia('/', 'dashboard/Index');
+            Route::controller(DashboardController::class)->group(function () {
+                Route::inertia('/', 'dashboard/Index');
+                Route::get('/characters', 'characters');
+            });
         });
     });
 
