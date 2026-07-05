@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 
 class CharacterController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $characters = Character::where('isShared', true)->get();
+        $characters = Character::with('user')->where('is_shared', true)->get();
 
-        return inertia('Characters', ['characters' => $characters->toArray()]);
+        return inertia('character/Shared', ['characters' => $characters->toArray()]);
     }
 
     public function create()
