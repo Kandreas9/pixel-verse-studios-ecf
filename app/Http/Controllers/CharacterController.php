@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\CharacterReviewed;
 use App\Models\Character;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CharacterController extends Controller
 {
@@ -73,7 +75,7 @@ class CharacterController extends Controller
     {
         $character->delete();
 
-        return redirect('/profile');
+        return back();
     }
 
     public function share(Character $character)
@@ -92,6 +94,26 @@ class CharacterController extends Controller
         $character->update([
             'is_shared' => false,
         ]);
+
+        return back();
+    }
+
+    public function approve(Character $character)
+    {
+        Mail::to($character->user->email)->queue(new CharacterReviewed("Your character named {$character->name} has been approved", ''));
+
+        $character->update([
+            'is_approved' => true,
+        ]);
+
+        return back();
+    }
+
+    public function reject(Request $request, Character $character)
+    {
+        Mail::to($character->user->email)->queue(new CharacterReviewed("Your character named {$character->name} has been rejected and deleted", $request->input('reason')));
+
+        $character->delete();
 
         return back();
     }
