@@ -28,6 +28,22 @@ export default function CharacterItem({ user, character }) {
         }, 2000);
     };
 
+    const handleDuplicateClick = () => {
+        setProcessing(true);
+
+        router.post(
+            '/characters',
+            {
+                ...character,
+                name: `${character.name}-copy${Date.now()}`,
+            },
+            {
+                preserveScroll: true,
+                onFinish: () => setProcessing(false),
+            },
+        );
+    };
+
     const handleShareToggle = () => {
         setIsShared(!isShared);
         setProcessing(true);
@@ -116,6 +132,20 @@ export default function CharacterItem({ user, character }) {
                                         >
                                             Edit
                                         </Link>
+                                    </DropdownMenuItem>
+                                </DropdownMenuGroup>
+
+                                <DropdownMenuSeparator />
+
+                                <DropdownMenuGroup>
+                                    <DropdownMenuItem asChild>
+                                        <button
+                                            disabled={processing}
+                                            onClick={handleDuplicateClick}
+                                            className="block w-full cursor-pointer"
+                                        >
+                                            Duplicate
+                                        </button>
                                     </DropdownMenuItem>
                                 </DropdownMenuGroup>
 
