@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Mail\CharacterReviewed;
 use App\Models\Character;
+use App\Models\CharacterLog;
+use App\Models\Item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -57,18 +59,54 @@ class CharacterController extends Controller
         ]);
     }
 
-    public function edit(Request $request)
+    public function edit(Character $character)
     {
-        return inertia('CharacterEdit');
+        $character->load('items');
+        $activeItems = Item::where('is_active', true)->get();
+
+        return inertia('character/Edit', ['character' => $character, 'items' => $activeItems->toArray()]);
     }
 
     public function update(Request $request, Character $character)
     {
-        $validated = $request->validate(['name' => ['string', 'min:3', 'max:50']]);
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'min:3', 'max:50'],
+            'gender' => ['required', 'string', 'min:3', 'max:50'],
+            'skin_color' => ['required', 'string', 'max:50'],
+            'eye_color' => ['required', 'string', 'max:50'],
+            'eye_shape' => ['required', 'string',  'max:50'],
+            'hair_color' => ['required', 'string',  'max:50'],
+            'nose_shape' => ['required', 'string',  'max:50'],
+            'mouth_shape' => ['required', 'string', 'max:50'],
+        ]);
 
-        $character->update($validated);
+        $character->fill($validated);
 
-        return redirect('/');
+        // Find changed in character
+        $changed = [];
+        foreach ($character->getDirty() as $field => $newValue) {
+            $changed[$field] = $newValue;
+        }
+
+        // Find id for each item checked
+        $checkedItemIds = [];
+        foreach ($request->input('items') as $key => $value) {
+            $checkedItemIds[] = Item::where('name', $key)->value('id');
+        }
+
+        $character->items()->sync($checkedItemIds);
+
+        // Create mongo character log
+        CharacterLog::create([
+            'user_id' => $character->user_id,
+            'name' => $character->name,
+            'changes' => $changed,
+            'items' => $checkedItemIds,
+        ]);
+
+        $character->save();
+
+        return redirect('/profile');
     }
 
     public function destroy(Character $character)

@@ -19,7 +19,7 @@ class ItemFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'type' => fake()->text(50),
+            'type' => fake()->text(10),
             'is_active' => fake()->boolean(),
         ];
     }
