@@ -43,10 +43,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::get('/items', 'index');
                 Route::get('/items/create', 'create');
                 Route::post('/items', 'store');
-                Route::get('/items/{item}', 'show');
+                // Route::get('/items/{item}', 'show');
                 Route::get('/items/{item}/edit', 'edit');
                 Route::patch('/items/{item}', 'update');
                 Route::delete('/items/{item}', 'destroy');
+
+                Route::patch('items/{item}/activate', 'activate');
+                Route::patch('items/{item}/deactivate', 'deactivate');
             });
 
             Route::controller(DashboardController::class)->group(function () {

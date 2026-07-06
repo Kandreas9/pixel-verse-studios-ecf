@@ -12,7 +12,10 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
+        $items = Item::all();
+
+        return inertia('dashboard/Items', ['items' => $items->toArray()]);
+
     }
 
     /**
@@ -20,7 +23,7 @@ class ItemController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('dashboard/ItemCreate');
     }
 
     /**
@@ -28,15 +31,14 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['name' => ['required', 'string', 'min:3', 'max:50'], 'type' => ['required', 'string', 'min:3', 'max:50'], 'isActive' => ['boolean']]);
+        $request->validate(['name' => ['required', 'string', 'min:3', 'max:50'], 'type' => ['required', 'string', 'min:3', 'max:50']]);
 
         Item::create([
             'name' => $request->input('name'),
             'type' => $request->input('type'),
-            'isActive' => $request->input('isActive'),
         ]);
 
-        return redirect('/');
+        return redirect('/dashboard/items');
     }
 
     /**
@@ -52,7 +54,7 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
-        //
+        return inertia('dashboard/ItemEdit', ['item' => $item]);
     }
 
     /**
@@ -60,11 +62,11 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item)
     {
-        $validated = $request->validate(['name' => ['string', 'min:3', 'max:50'], 'type' => ['string', 'min:3', 'max:50'], 'isActive' => ['boolean']]);
+        $validated = $request->validate(['name' => ['string', 'min:3', 'max:50'], 'type' => ['string', 'min:3', 'max:50']]);
 
         $item->update($validated);
 
-        return redirect('/');
+        return redirect('/dashboard/items');
     }
 
     /**
@@ -74,6 +76,24 @@ class ItemController extends Controller
     {
         $item->delete();
 
-        return redirect('/');
+        return back();
+    }
+
+    public function activate(Item $item)
+    {
+        $item->update([
+            'is_active' => true,
+        ]);
+
+        return back();
+    }
+
+    public function deactivate(Item $item)
+    {
+        $item->update([
+            'is_active' => false,
+        ]);
+
+        return back();
     }
 }
