@@ -1,6 +1,5 @@
 import CharacterList from '@/components/character/CharacterList';
-import { Input } from '@/components/ui/input';
-import { Head, usePage } from '@inertiajs/react';
+import { Head } from '@inertiajs/react';
 
 export default function Shared({ characters }) {
     return (

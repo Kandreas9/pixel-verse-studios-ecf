@@ -36,7 +36,7 @@ class CommentController extends Controller
             'text' => $request->string('text'),
         ]);
 
-        return redirect('/');
+        return back();
     }
 
     /**
