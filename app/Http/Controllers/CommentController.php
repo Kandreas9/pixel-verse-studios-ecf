@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\CommentReviewed;
 use App\Models\Character;
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CommentController extends Controller
 {
@@ -71,6 +73,7 @@ class CommentController extends Controller
 
     public function approve(Comment $comment)
     {
+        Mail::to($comment->user->email)->queue(new CommentReviewed('Your comment has been approved', ''));
 
         $comment->update([
             'is_approved' => true,
@@ -79,12 +82,11 @@ class CommentController extends Controller
         return back();
     }
 
-    public function reject(Comment $comment)
+    public function reject(Request $request, Comment $comment)
     {
+        Mail::to($comment->user->email)->queue(new CommentReviewed('Your comment has been rejected and deleted', $request->input('reason')));
 
-        $comment->update([
-            'is_approved' => false,
-        ]);
+        $comment->delete();
 
         return back();
     }

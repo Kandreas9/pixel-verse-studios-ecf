@@ -56,8 +56,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::controller(DashboardController::class)->group(function () {
                 Route::get('/', 'index');
                 Route::get('/characters', 'characters');
+
                 Route::get('/users', 'users');
                 Route::delete('/users/{user}', 'userDestroy');
+
+                Route::get('/comments', 'comments');
+                Route::delete('/comments/{comment}', 'commentDestroy');
             });
         });
 
@@ -81,8 +85,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::post('/{character}/comments', 'store');
         });
 
-        Route::patch('/comments/{comment}/approve', 'approve');
-        Route::patch('/comments/{comment}/reject', 'reject');
+        Route::patch('/comments/{comment}/approve', 'approve')->middleware(['role:Moderator|Super-Admin']);
+        Route::delete('/comments/{comment}/reject', 'reject')->middleware(['role:Moderator|Super-Admin']);
     });
 });
 
