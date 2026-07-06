@@ -51,11 +51,11 @@ class CharacterController extends Controller
         return redirect('/profile');
     }
 
-    public function show(Request $request, Character $character)
+    public function show(Character $character)
     {
         return inertia('character/Detail', [
-            'character' => $character,
-            'comments' => $character->comments,
+            'character' => $character->load('items')->load('user'),
+            'comments' => $character->comments->load('user'),
         ]);
     }
 
