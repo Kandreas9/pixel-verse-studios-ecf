@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react';
-import { LayoutGrid, List } from 'lucide-react';
+import { LayoutGrid, List, Shirt } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
@@ -24,6 +24,11 @@ const mainNavItems: NavItem[] = [
         title: 'Characters',
         href: '/dashboard/characters',
         icon: List,
+    },
+    {
+        title: 'Items',
+        href: '/dashboard/items',
+        icon: Shirt,
     },
 ];
 
