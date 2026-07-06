@@ -232,6 +232,7 @@ export default function Detail({ character, comments }) {
                                     <div key={comment.id}>
                                         <CharacterCommentItem
                                             comment={comment}
+                                            auth={auth}
                                         />
                                     </div>
                                 );

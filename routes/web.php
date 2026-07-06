@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CommentRatingController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ItemController;
@@ -83,10 +84,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::controller(CommentController::class)->group(function () {
         Route::prefix('characters')->group(function () {
             Route::post('/{character}/comments', 'store');
+
         });
 
         Route::patch('/comments/{comment}/approve', 'approve')->middleware(['role:Moderator|Super-Admin']);
         Route::delete('/comments/{comment}/reject', 'reject')->middleware(['role:Moderator|Super-Admin']);
+    });
+
+    Route::controller(CommentRatingController::class)->group(function () {
+        Route::post('/comments/{comment}/ratings', 'store');
+        Route::delete('/comments/{comment}/ratings/{rating}', 'destroy');
     });
 });
 
