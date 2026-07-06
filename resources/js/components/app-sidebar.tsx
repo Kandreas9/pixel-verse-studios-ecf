@@ -1,5 +1,5 @@
-import { Link } from '@inertiajs/react';
-import { LayoutGrid, List, Shirt, User } from 'lucide-react';
+import { Link, usePage } from '@inertiajs/react';
+import { LayoutGrid, List, Shirt, User, Shield } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
@@ -37,7 +37,17 @@ const mainNavItems: NavItem[] = [
     },
 ];
 
+const adminNavItems: NavItem[] = [
+    {
+        title: 'Moderators',
+        href: '/dashboard/moderators',
+        icon: Shield,
+    },
+];
+
 export function AppSidebar() {
+    const { auth } = usePage().props;
+
     return (
         <Sidebar collapsible="icon" variant="inset">
             <SidebarHeader>
@@ -57,7 +67,11 @@ export function AppSidebar() {
             </SidebarHeader>
 
             <SidebarContent>
-                <NavMain items={mainNavItems} />
+                <NavMain
+                    roles={auth.roles}
+                    items={mainNavItems}
+                    adminItems={adminNavItems}
+                />
             </SidebarContent>
 
             <SidebarFooter>
