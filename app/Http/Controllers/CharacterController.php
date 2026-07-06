@@ -11,11 +11,22 @@ use Illuminate\Support\Facades\Mail;
 
 class CharacterController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $characters = Character::with('user')->where('is_shared', true)->get();
+        $search = $request->input('search');
 
-        return inertia('character/Shared', ['characters' => $characters->toArray()]);
+        $characters = Character::with('user')
+            ->when($search, function ($query, $search) {
+                $query->where('name', 'like', "%{$search}%");
+            })
+            ->where('is_shared', true)->get();
+
+        return inertia('character/Shared', [
+            'characters' => $characters->toArray(),
+            'filters' => [
+                'search' => $search,
+            ],
+        ]);
     }
 
     public function create()
