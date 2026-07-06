@@ -1,7 +1,24 @@
 import CharacterList from '@/components/character/CharacterList';
-import { Head } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
+import { useState } from 'react';
 
-export default function Shared({ characters }) {
+export default function Shared({ characters, filters }) {
+    const [search, setSearch] = useState(filters.search || '');
+
+    function handleSearch(e) {
+        const value = e.target.value;
+        setSearch(value);
+
+        router.get(
+            '/characters',
+            { search: value },
+            {
+                preserveState: true,
+                replace: true,
+            },
+        );
+    }
+
     return (
         <>
             <Head>
@@ -13,15 +30,14 @@ export default function Shared({ characters }) {
             </Head>
 
             <div className="px-4 py-[2rem]">
-                {/*
-                <Input
-                    id='name'
+                <input
                     type="text"
-                    required
-                    tabIndex={1}
-                    placeholder="name"
+                    placeholder="Search name"
+                    value={search}
+                    onChange={handleSearch}
+                    className="mb-4 rounded border px-3 py-2"
                 />
-                */}
+
                 <CharacterList characters={characters} isSharedPage={true} />
             </div>
         </>
