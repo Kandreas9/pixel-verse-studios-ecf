@@ -21,4 +21,9 @@ class Comment extends Model
 
         return $this->belongsTo(Character::class);
     }
+
+    public function ratings()
+    {
+        return $this->belongsToMany(Rating::class);
+    }
 }

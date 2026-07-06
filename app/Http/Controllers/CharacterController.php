@@ -55,7 +55,7 @@ class CharacterController extends Controller
     {
         return inertia('character/Detail', [
             'character' => $character->load('items')->load('user'),
-            'comments' => $character->comments->load('user'),
+            'comments' => $character->comments->load('user')->load('ratings'),
         ]);
     }
 
