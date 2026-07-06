@@ -8,7 +8,7 @@ import { Form, Head } from '@inertiajs/react';
 export default function ItemEdit({ item }) {
     return (
         <>
-            <Head title="Dashboard - Item Creation Form" />
+            <Head title="Dashboard - Item Edit Form" />
 
             <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-background px-6 py-[2rem] md:p-10">
                 <div className="w-full max-w-sm">
