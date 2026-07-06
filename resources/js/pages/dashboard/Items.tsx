@@ -1,4 +1,4 @@
-import ItemsList from '@/components/items/ItemsList';
+import ItemsList from '@/components/item/ItemsList';
 import { Head, Link } from '@inertiajs/react';
 import { Plus } from 'lucide-react';
 
