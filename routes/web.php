@@ -53,8 +53,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
             });
 
             Route::controller(DashboardController::class)->group(function () {
-                Route::inertia('/', 'dashboard/Index');
+                Route::get('/', 'index');
                 Route::get('/characters', 'characters');
+                Route::get('/users', 'users');
+                Route::delete('/users/{user}', 'userDestroy');
             });
         });
     });
