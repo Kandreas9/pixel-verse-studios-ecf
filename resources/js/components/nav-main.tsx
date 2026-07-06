@@ -9,7 +9,14 @@ import {
 import { useCurrentUrl } from '@/hooks/use-current-url';
 import type { NavItem } from '@/types';
 
-export function NavMain({ items = [] }: { items: NavItem[] }) {
+export function NavMain({
+    roles,
+    items = [],
+    adminItems = [],
+}: {
+    items: NavItem[];
+    adminItems: NavItem[];
+}) {
     const { isCurrentUrl } = useCurrentUrl();
 
     return (
@@ -31,6 +38,28 @@ export function NavMain({ items = [] }: { items: NavItem[] }) {
                     </SidebarMenuItem>
                 ))}
             </SidebarMenu>
+
+            {roles.includes('Super-Admin') && (
+                <>
+                    <SidebarGroupLabel>Admin</SidebarGroupLabel>
+                    <SidebarMenu>
+                        {adminItems.map((adminItem) => (
+                            <SidebarMenuItem key={adminItem.title}>
+                                <SidebarMenuButton
+                                    asChild
+                                    isActive={isCurrentUrl(adminItem.href)}
+                                    tooltip={{ children: adminItem.title }}
+                                >
+                                    <Link href={adminItem.href} prefetch>
+                                        {adminItem.icon && <adminItem.icon />}
+                                        <span>{adminItem.title}</span>
+                                    </Link>
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
+                        ))}
+                    </SidebarMenu>
+                </>
+            )}
         </SidebarGroup>
     );
 }

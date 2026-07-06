@@ -5,6 +5,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ItemController;
+use Illuminate\Auth\Middleware\RequirePassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -57,6 +58,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::get('/characters', 'characters');
                 Route::get('/users', 'users');
                 Route::delete('/users/{user}', 'userDestroy');
+            });
+        });
+
+        Route::middleware(['role:Super-Admin'])->group(function () {
+            Route::controller(DashboardController::class)->group(function () {
+                Route::get('/moderators', 'moderators');
+                Route::get('/moderators/create', 'moderatorsCreate');
+                Route::post('/moderators', 'moderatorsStore');
+                Route::get('/moderators/{user}/password/edit', 'moderatorsPasswordEdit')
+                    ->middleware(RequirePassword::class);
+                Route::patch('/moderators/{user}/password/', 'moderatorsPasswordUpdate');
+
             });
         });
     });
