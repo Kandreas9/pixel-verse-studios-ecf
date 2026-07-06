@@ -29,7 +29,8 @@ it('only moderators/admins can render items page', function () {
     get('/dashboard/items')
         ->assertOk()
         ->assertInertia(fn (AssertableInertia $page) => $page
-            ->component('Items')
+            ->component('dashboard/Items')
+            ->has('items')
         );
 });
 
@@ -42,7 +43,7 @@ it('only moderators/admins can render items creation form', function () {
     get('/dashboard/items/create')
         ->assertOk()
         ->assertInertia(fn (AssertableInertia $page) => $page
-            ->component('ItemsCreate'));
+            ->component('dashboard/ItemCreate'));
 });
 
 it('can only be created by moderator/admins', function () {
@@ -122,4 +123,32 @@ it('can be deleted by moderator/admin', function () {
         ->assertRedirect();
 
     assertDatabaseMissing('items', ['id' => $item->id]);
+});
+
+it('can be activated by moderator/admin', function () {
+    $item = Item::factory()->create([
+        'is_active' => false,
+    ]);
+
+    patch("/dashboard/items/{$item->id}/activate")
+        ->assertForbidden();
+
+    $this->user->assignRole('Moderator');
+
+    patch("/dashboard/items/{$item->id}/activate")
+        ->assertRedirect();
+});
+
+it('can be deactivated by moderator/admin', function () {
+    $item = Item::factory()->create([
+        'is_active' => true,
+    ]);
+
+    patch("/dashboard/items/{$item->id}/deactivate")
+        ->assertForbidden();
+
+    $this->user->assignRole('Moderator');
+
+    patch("/dashboard/items/{$item->id}/deactivate")
+        ->assertRedirect();
 });

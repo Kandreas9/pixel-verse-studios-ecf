@@ -2,6 +2,7 @@
 
 use App\Models\Character;
 use App\Models\User;
+use Database\Seeders\PermissionsSeeder;
 use Inertia\Testing\AssertableInertia;
 
 use function Pest\Laravel\actingAs;
@@ -14,6 +15,7 @@ use function Pest\Laravel\post;
 
 beforeEach(function () {
     $this->user = User::factory()->create();
+    $this->seed(PermissionsSeeder::class);
     actingAs($this->user);
 });
 
@@ -141,4 +143,38 @@ it('can be unshared by user', function () {
 
     patch("/characters/{$character->id}/unshare")
         ->assertRedirect();
+});
+
+it('can be approved by moderator/admin', function () {
+    $character = Character::factory()->for($this->user)->create([
+        'is_approved' => false,
+    ]);
+
+    patch("/characters/{$character->id}/approve")
+        ->assertForbidden();
+
+    $this->user->assignRole('Moderator');
+
+    patch("/characters/{$character->id}/approve")
+        ->assertRedirect();
+});
+
+it('can be rejected by moderator/admin', function () {
+    $character = Character::factory()->for($this->user)->create([
+        'is_approved' => true,
+    ]);
+
+    delete("/characters/{$character->id}/reject", [
+        'reason' => 'mock reason',
+    ])
+        ->assertForbidden();
+
+    $this->user->assignRole('Moderator');
+
+    delete("/characters/{$character->id}/reject", [
+        'reason' => 'mock reason',
+    ])
+        ->assertRedirect();
+
+    assertDatabaseMissing('characters', ['id' => $character->id]);
 });
