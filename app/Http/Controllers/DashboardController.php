@@ -6,6 +6,7 @@ use App\Concerns\PasswordValidationRules;
 use App\Concerns\ProfileValidationRules;
 use App\Models\Character;
 use App\Models\CharacterLog;
+use App\Models\Comment;
 use App\Models\Contact;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -106,5 +107,19 @@ class DashboardController extends Controller
         $characterLogs = CharacterLog::get();
 
         return inertia('dashboard/CharacterLogs', ['characterLogs' => $characterLogs->toArray()]);
+    }
+
+    public function comments()
+    {
+        $comments = Comment::with('user')->get();
+
+        return inertia('dashboard/Comments', ['comments' => $comments->toArray()]);
+    }
+
+    public function commentDestroy(Request $request, Comment $comment)
+    {
+        $comment->delete();
+
+        return back();
     }
 }

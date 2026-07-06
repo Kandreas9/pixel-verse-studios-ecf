@@ -13,12 +13,12 @@ class Comment extends Model
 
     public function user()
     {
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function character()
     {
 
-        $this->belongsTo(Character::class);
+        return $this->belongsTo(Character::class);
     }
 }
