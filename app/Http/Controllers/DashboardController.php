@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Concerns\PasswordValidationRules;
 use App\Concerns\ProfileValidationRules;
 use App\Models\Character;
+use App\Models\CharacterLog;
+use App\Models\Contact;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -90,5 +92,19 @@ class DashboardController extends Controller
         ]);
 
         return redirect('/dashboard/moderators');
+    }
+
+    public function contactLogs()
+    {
+        $contactLogs = Contact::get();
+
+        return inertia('dashboard/ContactLogs', ['contactLogs' => $contactLogs->toArray()]);
+    }
+
+    public function characterLogs()
+    {
+        $characterLogs = CharacterLog::get();
+
+        return inertia('dashboard/CharacterLogs', ['characterLogs' => $characterLogs->toArray()]);
     }
 }

@@ -70,6 +70,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
                     ->middleware(RequirePassword::class);
                 Route::patch('/moderators/{user}/password/', 'moderatorsPasswordUpdate');
 
+                Route::get('/contacts/logs', 'contactLogs');
+                Route::get('/characters/logs', 'characterLogs');
             });
         });
     });
