@@ -1,5 +1,13 @@
 import { Link, usePage } from '@inertiajs/react';
-import { LayoutGrid, List, Shirt, User, Shield } from 'lucide-react';
+import {
+    LayoutGrid,
+    List,
+    Shirt,
+    User,
+    Shield,
+    Mail,
+    UserPen,
+} from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
@@ -42,6 +50,16 @@ const adminNavItems: NavItem[] = [
         title: 'Moderators',
         href: '/dashboard/moderators',
         icon: Shield,
+    },
+    {
+        title: 'Contact Logs',
+        href: '/dashboard/contacts/logs',
+        icon: Mail,
+    },
+    {
+        title: 'Character Logs',
+        href: '/dashboard/characters/logs',
+        icon: UserPen,
     },
 ];
 
