@@ -7,6 +7,7 @@ import {
     Shield,
     Mail,
     UserPen,
+    MessageCircle,
 } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavMain } from '@/components/nav-main';
@@ -42,6 +43,11 @@ const mainNavItems: NavItem[] = [
         title: 'Users',
         href: '/dashboard/users',
         icon: User,
+    },
+    {
+        title: 'Comments',
+        href: '/dashboard/comments',
+        icon: MessageCircle,
     },
 ];
 
