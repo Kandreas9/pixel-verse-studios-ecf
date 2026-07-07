@@ -115,11 +115,4 @@ class DashboardController extends Controller
 
         return inertia('dashboard/Comments', ['comments' => $comments->toArray()]);
     }
-
-    public function commentDestroy(Request $request, Comment $comment)
-    {
-        $comment->delete();
-
-        return back();
-    }
 }
