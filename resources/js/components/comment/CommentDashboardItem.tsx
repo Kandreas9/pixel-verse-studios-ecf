@@ -194,7 +194,7 @@ export default function CommentDashboardItem({ comment }) {
                             className="h-8 cursor-pointer rounded-md bg-red-400 px-3 text-[.9rem] has-[>svg]:px-2.5"
                             as="button"
                             method="delete"
-                            href={`/dashboard/comments/${comment.id}`}
+                            href={`/comments/${comment.id}`}
                         >
                             Sure?
                         </Link>

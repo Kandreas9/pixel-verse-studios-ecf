@@ -81,14 +81,14 @@ class CharacterController extends Controller
     public function update(Request $request, Character $character)
     {
         $validated = $request->validate([
-            'name' => ['required', 'string', 'min:3', 'max:50'],
-            'gender' => ['required', 'string', 'min:3', 'max:50'],
-            'skin_color' => ['required', 'string', 'max:50'],
-            'eye_color' => ['required', 'string', 'max:50'],
-            'eye_shape' => ['required', 'string',  'max:50'],
-            'hair_color' => ['required', 'string',  'max:50'],
-            'nose_shape' => ['required', 'string',  'max:50'],
-            'mouth_shape' => ['required', 'string', 'max:50'],
+            'name' => ['string', 'min:3', 'max:50'],
+            'gender' => ['string', 'min:3', 'max:50'],
+            'skin_color' => ['string', 'max:50'],
+            'eye_color' => ['string', 'max:50'],
+            'eye_shape' => ['string',  'max:50'],
+            'hair_color' => ['string',  'max:50'],
+            'nose_shape' => ['string',  'max:50'],
+            'mouth_shape' => ['string', 'max:50'],
         ]);
 
         $character->fill($validated);
