@@ -45,7 +45,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::get('/items', 'index');
                 Route::get('/items/create', 'create');
                 Route::post('/items', 'store');
-                // Route::get('/items/{item}', 'show');
                 Route::get('/items/{item}/edit', 'edit');
                 Route::patch('/items/{item}', 'update');
                 Route::delete('/items/{item}', 'destroy');
@@ -62,7 +61,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::delete('/users/{user}', 'userDestroy');
 
                 Route::get('/comments', 'comments');
-                Route::delete('/comments/{comment}', 'commentDestroy');
             });
         });
 
@@ -86,6 +84,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::post('/{character}/comments', 'store');
 
         });
+
+        Route::delete('/comments/{comment}', 'destroy')->middleware(['role:Moderator|Super-Admin']);
 
         Route::patch('/comments/{comment}/approve', 'approve')->middleware(['role:Moderator|Super-Admin']);
         Route::delete('/comments/{comment}/reject', 'reject')->middleware(['role:Moderator|Super-Admin']);

@@ -60,21 +60,6 @@ it('can only be created by moderator/admins', function () {
     ]);
 });
 
-it('only moderators/admins can render item detail page', function () {
-    $item = Item::factory()->create();
-
-    get("/dashboard/items/{$item->id}")
-        ->assertForbidden();
-
-    $this->user->assignRole('Moderator');
-
-    get("/dashboard/items/{$item->id}")
-        ->assertOk()
-        ->assertInertia(fn (AssertableInertia $page) => $page
-            ->component('ItemDetail'));
-
-});
-
 it('only moderators/admins can render items edit form', function () {
     $item = Item::factory()->create();
 
@@ -86,7 +71,7 @@ it('only moderators/admins can render items edit form', function () {
     get("/dashboard/items/{$item->id}/edit")
         ->assertOk()
         ->assertInertia(fn (AssertableInertia $page) => $page
-            ->component('ItemEdit'));
+            ->component('dashboard/ItemEdit'));
 
 });
 

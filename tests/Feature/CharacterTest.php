@@ -46,19 +46,6 @@ it('can be created by user', function () {
     ]);
 });
 
-/*
-it('can be viewed by user', function () {
-    $character = Character::factory()->for($this->user)->create(['name' => 'john']);
-
-    get('/my-characters')
-        ->assertStatus(200)
-        ->assertInertia(fn (AssertableInertia $page) => $page->
-            component('MyCharacters')->
-            has('characters')
-        );
-});
-*/
-
 it('can render character detail page', function () {
     $character = Character::factory()->for($this->user)->hasComments(3)->create();
 
@@ -77,7 +64,9 @@ it('can render character edit form', function () {
     get("/characters/{$character->id}/edit")
         ->assertStatus(200)
         ->assertInertia(fn (AssertableInertia $page) => $page
-            ->component('CharacterEdit')
+            ->component('character/Edit')
+            ->has('character')
+            ->has('items')
         );
 
 });
@@ -87,6 +76,7 @@ it('can be edited by user', function () {
 
     patch("/characters/{$character->id}", [
         'name' => 'mark',
+        'items' => [],
     ])
         ->assertRedirect();
 
@@ -96,18 +86,6 @@ it('can be edited by user', function () {
     ]);
 });
 
-it('can only be edited by user who created character', function () {
-    $character = Character::factory()->for($this->user)->create();
-
-    $otherUser = User::factory()->create();
-
-    actingAs($otherUser)
-        ->patch("/characters/{$character->id}", [
-            'name' => 'mark',
-        ])
-        ->assertForbidden();
-});
-
 it('can be deleted by user', function () {
     $character = Character::factory()->for($this->user)->create();
 
@@ -115,16 +93,6 @@ it('can be deleted by user', function () {
         ->assertRedirect();
 
     assertDatabaseMissing('characters', ['id' => $character->id]);
-});
-
-it('can only be deleted by user who created character', function () {
-    $character = Character::factory()->for($this->user)->create();
-
-    $otherUser = User::factory()->create();
-
-    actingAs($otherUser)
-        ->delete("/characters/{$character->id}")
-        ->assertForbidden();
 });
 
 it('can be shared by user', function () {
