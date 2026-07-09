@@ -14,6 +14,9 @@ Route::inertia('/', 'Homepage')->name('home');
 Route::inertia('/terms', 'legal/TermsOfService');
 Route::inertia('/privacy', 'legal/PrivacyPolicy');
 
+Route::get('/characters', [CharacterController::class, 'index']);
+Route::get('/characters/{character}', [CharacterController::class, 'show']);
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('/contact', 'Contact');
     Route::post('/contact', ContactController::class);
@@ -24,10 +27,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Character Routes
     Route::controller(CharacterController::class)->group(function () {
-        Route::get('/characters', 'index');
         Route::get('/characters/create', 'create');
         Route::post('/characters', 'store');
-        Route::get('/characters/{character}', 'show');
         Route::get('/characters/{character}/edit', 'edit');
         Route::patch('/characters/{character}', 'update');
         Route::delete('/characters/{character}', 'destroy');
@@ -39,6 +40,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::delete('/characters/{character}/reject', 'reject')->middleware(['role:Moderator|Super-Admin']);
     });
 
+    // Dashboard Routes
     Route::prefix('dashboard')->group(function () {
         Route::middleware(['role:Moderator|Super-Admin'])->group(function () {
             Route::controller(ItemController::class)->group(function () {
@@ -80,6 +82,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
     });
 
+    // Comment Routes
     Route::controller(CommentController::class)->group(function () {
         Route::prefix('characters')->group(function () {
             Route::post('/{character}/comments', 'store');

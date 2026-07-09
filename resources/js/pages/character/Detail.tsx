@@ -32,7 +32,7 @@ export default function Detail({ character, comments }) {
                             )}
                         >
                             <AvatarImage
-                                src={character.image}
+                                src={`/${character.image}`}
                                 alt={character.name}
                             />
                             <AvatarFallback
@@ -150,80 +150,84 @@ export default function Detail({ character, comments }) {
                 </div>
 
                 <div>
-                    <Form
-                        action={`/characters/${character.id}/comments`}
-                        method="post"
-                        disableWhileProcessing
-                        resetOnSuccess={['text']}
-                        //className="flex flex-col gap-6"
-                    >
-                        {({ processing, errors, recentlySuccessful }) => (
-                            <>
-                                <div className="flex items-center justify-center gap-5">
-                                    <Label htmlFor="text">
-                                        <Avatar
-                                            className={cn(
-                                                'h-8 w-8 overflow-hidden rounded-full',
-                                            )}
-                                        >
-                                            <AvatarImage
-                                                src={auth.user.image}
-                                                alt={auth.user.name}
-                                            />
-                                            <AvatarFallback
+                    {auth.user && (
+                        <Form
+                            action={`/characters/${character.id}/comments`}
+                            method="post"
+                            disableWhileProcessing
+                            resetOnSuccess={['text']}
+                            //className="flex flex-col gap-6"
+                        >
+                            {({ processing, errors, recentlySuccessful }) => (
+                                <>
+                                    <div className="flex items-center justify-center gap-5">
+                                        <Label htmlFor="text">
+                                            <Avatar
                                                 className={cn(
-                                                    'rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white',
+                                                    'h-8 w-8 overflow-hidden rounded-full',
                                                 )}
                                             >
-                                                {getInitials(auth.user.name)}
-                                            </AvatarFallback>
-                                        </Avatar>
-                                    </Label>
-                                    <Input
-                                        id="text"
-                                        type="text"
-                                        required
-                                        tabIndex={1}
-                                        name="text"
-                                        placeholder="Leave a comment"
+                                                <AvatarImage
+                                                    src={auth.user.image}
+                                                    alt={auth.user.name}
+                                                />
+                                                <AvatarFallback
+                                                    className={cn(
+                                                        'rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white',
+                                                    )}
+                                                >
+                                                    {getInitials(
+                                                        auth.user.name,
+                                                    )}
+                                                </AvatarFallback>
+                                            </Avatar>
+                                        </Label>
+                                        <Input
+                                            id="text"
+                                            type="text"
+                                            required
+                                            tabIndex={1}
+                                            name="text"
+                                            placeholder="Leave a comment"
+                                        />
+
+                                        <Button
+                                            type="submit"
+                                            className="w-10"
+                                            tabIndex={4}
+                                            data-test="comment-button"
+                                        >
+                                            {processing && <Spinner />}
+                                            Send
+                                        </Button>
+                                    </div>
+
+                                    <InputError
+                                        message={errors.text}
+                                        className="mt-2"
                                     />
 
-                                    <Button
-                                        type="submit"
-                                        className="w-10"
-                                        tabIndex={4}
-                                        data-test="comment-button"
-                                    >
-                                        {processing && <Spinner />}
-                                        Send
-                                    </Button>
-                                </div>
+                                    {recentlySuccessful && (
+                                        <div className="text-green-400">
+                                            Your message has been sent
+                                        </div>
+                                    )}
 
-                                <InputError
-                                    message={errors.text}
-                                    className="mt-2"
-                                />
-
-                                {recentlySuccessful && (
-                                    <div className="text-green-400">
-                                        Your message has been sent
-                                    </div>
-                                )}
-
-                                {errors.validation && (
-                                    <div className="text-red-400">
-                                        {errors.validation}
-                                    </div>
-                                )}
-                            </>
-                        )}
-                    </Form>
+                                    {errors.validation && (
+                                        <div className="text-red-400">
+                                            {errors.validation}
+                                        </div>
+                                    )}
+                                </>
+                            )}
+                        </Form>
+                    )}
 
                     <div className="my-8 flex flex-col gap-4">
                         {[...comments].reverse().map((comment) => {
                             if (
                                 comment.is_approved ||
-                                comment.user_id === auth.user.id
+                                comment.user_id === auth.user?.id
                             ) {
                                 return (
                                     <div key={comment.id}>

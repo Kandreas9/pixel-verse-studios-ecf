@@ -7,7 +7,7 @@ export default function CharacterCommentItem({ comment, auth }) {
     const getInitials = useInitials();
 
     const authUserRating = comment.ratings.find(
-        (rating) => rating.user_id === auth.user.id,
+        (rating) => rating.user_id === auth.user?.id,
     );
 
     return (

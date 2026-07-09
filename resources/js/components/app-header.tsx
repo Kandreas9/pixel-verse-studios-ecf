@@ -63,42 +63,45 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                         className="flex items-center space-x-2 text-xl"
                     >
                         PixelVerse Studios
-                        {/*
-                            <AppLogo />
-                        */}
                     </Link>
 
                     {/* Desktop Navigation */}
                     <div className="ml-6 hidden h-full items-center space-x-6 lg:flex">
                         <NavigationMenu className="flex h-full items-stretch">
                             <NavigationMenuList className="flex h-full items-stretch space-x-2">
-                                {auth.user &&
-                                    mainNavItems.map((item, index) => (
-                                        <NavigationMenuItem
-                                            key={index}
-                                            className="relative flex h-full items-center"
-                                        >
-                                            <Link
-                                                href={item.href}
-                                                className={cn(
-                                                    navigationMenuTriggerStyle(),
-                                                    whenCurrentUrl(
-                                                        item.href,
-                                                        activeItemStyles,
-                                                    ),
-                                                    'h-9 cursor-pointer px-3',
-                                                )}
+                                {mainNavItems.map((item, index) => {
+                                    if (
+                                        auth.user ||
+                                        item.title === 'Characters'
+                                    ) {
+                                        return (
+                                            <NavigationMenuItem
+                                                key={index}
+                                                className="relative flex h-full items-center"
                                             >
-                                                {item.icon && (
-                                                    <item.icon className="mr-2 h-4 w-4" />
+                                                <Link
+                                                    href={item.href}
+                                                    className={cn(
+                                                        navigationMenuTriggerStyle(),
+                                                        whenCurrentUrl(
+                                                            item.href,
+                                                            activeItemStyles,
+                                                        ),
+                                                        'h-9 cursor-pointer px-3',
+                                                    )}
+                                                >
+                                                    {item.icon && (
+                                                        <item.icon className="mr-2 h-4 w-4" />
+                                                    )}
+                                                    {item.title}
+                                                </Link>
+                                                {isCurrentUrl(item.href) && (
+                                                    <div className="absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-white"></div>
                                                 )}
-                                                {item.title}
-                                            </Link>
-                                            {isCurrentUrl(item.href) && (
-                                                <div className="absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-white"></div>
-                                            )}
-                                        </NavigationMenuItem>
-                                    ))}
+                                            </NavigationMenuItem>
+                                        );
+                                    }
+                                })}
                             </NavigationMenuList>
                         </NavigationMenu>
                     </div>
@@ -125,28 +128,32 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                                     </SheetTitle>
                                     <SheetHeader className="flex justify-start text-left">
                                         PixelVerse Studios
-                                        {/*
-<AppLogoIcon className="h-6 w-6 fill-current text-black dark:text-white" />
-*/}
                                     </SheetHeader>
                                     <div className="flex h-full flex-1 flex-col space-y-4 p-4">
                                         <div className="flex h-full flex-col justify-between text-sm">
                                             <div className="flex flex-col space-y-4">
-                                                {auth.user &&
-                                                    mainNavItems.map((item) => (
-                                                        <Link
-                                                            key={item.title}
-                                                            href={item.href}
-                                                            className="flex items-center space-x-2 font-medium"
-                                                        >
-                                                            {item.icon && (
-                                                                <item.icon className="h-5 w-5" />
-                                                            )}
-                                                            <span>
-                                                                {item.title}
-                                                            </span>
-                                                        </Link>
-                                                    ))}
+                                                {mainNavItems.map((item) => {
+                                                    if (
+                                                        auth.user ||
+                                                        item.title ===
+                                                            'Characters'
+                                                    ) {
+                                                        return (
+                                                            <Link
+                                                                key={item.title}
+                                                                href={item.href}
+                                                                className="flex items-center space-x-2 font-medium"
+                                                            >
+                                                                {item.icon && (
+                                                                    <item.icon className="h-5 w-5" />
+                                                                )}
+                                                                <span>
+                                                                    {item.title}
+                                                                </span>
+                                                            </Link>
+                                                        );
+                                                    }
+                                                })}
                                             </div>
                                             {!auth.user && (
                                                 <div className="flex flex-col space-y-4">
