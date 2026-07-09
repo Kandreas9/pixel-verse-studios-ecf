@@ -23,8 +23,6 @@ export default function CharacterDashboardItem({ user, character }) {
     const getInitials = useInitials();
     const [isDeleteClicked, setIsDeleteClicked] = useState(false);
 
-    console.log(character);
-
     const handleDeleteClick = () => {
         setIsDeleteClicked(true);
 
