@@ -137,10 +137,6 @@ class CharacterController extends Controller
 
         $character->save();
 
-        if (isset($validated['image'])) {
-
-        }
-
         return redirect('/profile');
     }
 
