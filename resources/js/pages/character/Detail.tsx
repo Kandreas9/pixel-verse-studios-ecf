@@ -13,9 +13,6 @@ export default function Detail({ character, comments }) {
     const getInitials = useInitials();
     const { auth } = usePage().props;
 
-    console.log('character', character);
-    console.log('comments', comments);
-
     return (
         <>
             <Head>
