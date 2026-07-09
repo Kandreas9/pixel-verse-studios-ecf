@@ -55,6 +55,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
             Route::controller(DashboardController::class)->group(function () {
                 Route::get('/', 'index');
+
                 Route::get('/characters', 'characters');
 
                 Route::get('/users', 'users');
