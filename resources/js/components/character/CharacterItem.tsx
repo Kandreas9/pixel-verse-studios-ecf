@@ -66,7 +66,7 @@ export default function CharacterItem({ user, character }) {
                         className={cn('h-12 w-12 overflow-hidden rounded-full')}
                     >
                         <AvatarImage
-                            src={character.image}
+                            src={`/${character.image}`}
                             alt={character.name}
                         />
                         <AvatarFallback
