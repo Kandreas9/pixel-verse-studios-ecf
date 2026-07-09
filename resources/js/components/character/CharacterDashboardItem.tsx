@@ -23,6 +23,8 @@ export default function CharacterDashboardItem({ user, character }) {
     const getInitials = useInitials();
     const [isDeleteClicked, setIsDeleteClicked] = useState(false);
 
+    console.log(character);
+
     const handleDeleteClick = () => {
         setIsDeleteClicked(true);
 
@@ -39,7 +41,7 @@ export default function CharacterDashboardItem({ user, character }) {
                         className={cn('h-12 w-12 overflow-hidden rounded-full')}
                     >
                         <AvatarImage
-                            src={character.image}
+                            src={`/${character.image}`}
                             alt={character.name}
                         />
                         <AvatarFallback

@@ -41,13 +41,28 @@ export default function Edit({ character, items }) {
                                 <>
                                     <div className="grid gap-6">
                                         <div className="grid gap-2">
+                                            <Label htmlFor="image">Image</Label>
+                                            <Input
+                                                id="image"
+                                                type="file"
+                                                autoFocus
+                                                tabIndex={1}
+                                                name="image"
+                                            />
+                                            <InputError
+                                                message={errors.name}
+                                                className="mt-2"
+                                            />
+                                        </div>
+
+                                        <div className="grid gap-2">
                                             <Label htmlFor="name">Name</Label>
                                             <Input
                                                 id="name"
                                                 type="text"
                                                 required
                                                 autoFocus
-                                                tabIndex={1}
+                                                tabIndex={2}
                                                 autoComplete="name"
                                                 name="name"
                                                 placeholder="Character Name"
@@ -67,7 +82,7 @@ export default function Edit({ character, items }) {
                                                 id="gender"
                                                 type="text"
                                                 required
-                                                tabIndex={2}
+                                                tabIndex={3}
                                                 autoComplete="gender"
                                                 name="gender"
                                                 placeholder="Character Gender"
@@ -87,7 +102,7 @@ export default function Edit({ character, items }) {
                                                 id="skin_color"
                                                 type="text"
                                                 required
-                                                tabIndex={3}
+                                                tabIndex={4}
                                                 name="skin_color"
                                                 placeholder="Character Skin Color"
                                                 defaultValue={
@@ -108,7 +123,7 @@ export default function Edit({ character, items }) {
                                                 id="eye_color"
                                                 type="text"
                                                 required
-                                                tabIndex={4}
+                                                tabIndex={5}
                                                 name="eye_color"
                                                 placeholder="Character Eye Color"
                                                 defaultValue={
@@ -129,7 +144,7 @@ export default function Edit({ character, items }) {
                                                 id="eye_shape"
                                                 type="text"
                                                 required
-                                                tabIndex={5}
+                                                tabIndex={6}
                                                 name="eye_shape"
                                                 placeholder="Character Eye Shape"
                                                 defaultValue={
@@ -150,7 +165,7 @@ export default function Edit({ character, items }) {
                                                 id="hair_color"
                                                 type="text"
                                                 required
-                                                tabIndex={6}
+                                                tabIndex={7}
                                                 name="hair_color"
                                                 placeholder="Character Hair Color"
                                                 defaultValue={
@@ -171,7 +186,7 @@ export default function Edit({ character, items }) {
                                                 id="nose_shape"
                                                 type="text"
                                                 required
-                                                tabIndex={7}
+                                                tabIndex={8}
                                                 name="nose_shape"
                                                 placeholder="Character Nose Shape"
                                                 defaultValue={
@@ -192,7 +207,7 @@ export default function Edit({ character, items }) {
                                                 id="mouth_shape"
                                                 type="text"
                                                 required
-                                                tabIndex={8}
+                                                tabIndex={9}
                                                 name="mouth_shape"
                                                 placeholder="Character Mouth Shape"
                                                 defaultValue={
@@ -235,7 +250,7 @@ export default function Edit({ character, items }) {
                                         <Button
                                             type="submit"
                                             className="mt-2 w-full"
-                                            tabIndex={9}
+                                            tabIndex={10}
                                             data-test="create-character-button"
                                         >
                                             {processing && <Spinner />}
