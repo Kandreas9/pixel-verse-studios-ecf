@@ -28,6 +28,6 @@ class ContactController extends Controller
 
         $contact = Contact::create($validated);
 
-        Mail::to('admin@example.com')->queue(new ContactSubmitted($contact));
+        Mail::to('company@example.com')->queue(new ContactSubmitted($contact));
     }
 }

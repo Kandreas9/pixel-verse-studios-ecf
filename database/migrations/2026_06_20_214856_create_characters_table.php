@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('mouth_shape', 50);
             $table->boolean('is_shared')->default(false);
             $table->boolean('is_approved')->default(false);
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

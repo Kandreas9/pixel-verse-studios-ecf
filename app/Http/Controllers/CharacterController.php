@@ -7,6 +7,7 @@ use App\Models\Character;
 use App\Models\CharacterLog;
 use App\Models\Item;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
 
 class CharacterController extends Controller
@@ -89,11 +90,30 @@ class CharacterController extends Controller
             'hair_color' => ['string',  'max:50'],
             'nose_shape' => ['string',  'max:50'],
             'mouth_shape' => ['string', 'max:50'],
+            'image' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
         ]);
+
+        if (isset($validated['image'])) {
+            // Delete previous img if it exists
+            $pathOfCurrentImage = public_path($character->image);
+
+            if (File::exists($pathOfCurrentImage)) {
+                File::delete($pathOfCurrentImage);
+            }
+        }
 
         $character->fill($validated);
 
-        // Find changed in character
+        // Check if image exists and save on public/images
+        if (isset($validated['image'])) {
+            $imageName = time().'.'.$validated['image']->extension();
+
+            $validated['image']->move(public_path('images'), $imageName);
+
+            $character->image = "images/{$imageName}";
+        }
+
+        // Find changes in character
         $changed = [];
         foreach ($character->getDirty() as $field => $newValue) {
             $changed[$field] = $newValue;

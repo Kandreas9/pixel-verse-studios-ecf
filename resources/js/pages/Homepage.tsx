@@ -15,7 +15,7 @@ export default function Homepage() {
 
             <div className="flex flex-col items-center gap-[1rem] px-4 py-[3rem] md:flex-row md:justify-center">
                 <div className="relative aspect-video h-[8rem] w-[13rem] overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-                    <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
+                    <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-100/20" />
                 </div>
                 <div className="flex flex-col items-center gap-[1rem]">
                     <p className="text-center text-[var(--main-text-light)] md:max-w-[16rem]">
@@ -25,7 +25,7 @@ export default function Homepage() {
 
                     <Link
                         href={register()}
-                        className="inline-block rounded-sm border border-[#19140035] bg-blue-500 px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
+                        className="inline-block rounded-sm border border-[#19140035] bg-blue-500 px-5 py-1.5 text-sm leading-normal text-[#EDEDEC] hover:border-[#62605b] dark:border-[#3E3E3A]"
                     >
                         Sign Up
                     </Link>
@@ -41,10 +41,10 @@ export default function Homepage() {
 
                 <div className="flex gap-[1rem]">
                     <div className="relative aspect-video h-[5rem] w-[8rem] overflow-hidden rounded-xl border border-sidebar-border/70 md:h-[8rem] md:w-[13rem] dark:border-sidebar-border">
-                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
+                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-100/20" />
                     </div>
                     <div className="relative aspect-video h-[5rem] w-[8rem] overflow-hidden rounded-xl border border-sidebar-border/70 md:h-[8rem] md:w-[13rem] dark:border-sidebar-border">
-                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
+                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-100/20" />
                     </div>
                 </div>
             </div>
@@ -65,7 +65,7 @@ export default function Homepage() {
                     </section>
 
                     <div className="relative aspect-video h-[5rem] w-[8rem] overflow-hidden rounded-xl border border-sidebar-border/70 md:h-[8rem] md:w-[13rem] dark:border-sidebar-border">
-                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
+                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-100/20" />
                     </div>
                 </div>
             </div>
