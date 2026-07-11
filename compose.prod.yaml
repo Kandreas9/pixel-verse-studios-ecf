@@ -29,11 +29,13 @@ services:
 
     mysql:
         image: mysql:8.0
+        container_name: pixelverse-mysql
         restart: unless-stopped
         environment:
             MYSQL_DATABASE: ${DB_DATABASE}
             MYSQL_USER: ${DB_USERNAME}
             MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
         volumes:
             - mysql_data:/var/lib/mysql
         networks:
@@ -59,47 +61,10 @@ services:
         networks:
             - laravel
 
-    queue:
-        build:
-            context: .
-            dockerfile: ./docker/prod/php/Dockerfile
-        restart: unless-stopped
-        command: php artisan queue:work --tries=3 --timeout=90
-        depends_on:
-            - mysql
-            - mongodb
-        networks:
-            - laravel
-
-    traefik:
-        image: traefik:v3.0
-        command:
-            - '--providers.docker=true'
-            - '--entrypoints.web.address=:80'
-            - '--entrypoints.websecure.address=:443'
-            - '--certificatesresolvers.le.acme.httpchallenge.entrypoint=web'
-            - '--certificatesresolvers.le.acme.email=you@yourdomain.com'
-            - '--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json'
-        labels:
-            - 'traefik.enable=true'
-            - 'traefik.http.routers.app.rule=Host(`localhost`)'
-            - 'traefik.http.routers.app.entrypoints=websecure'
-            - 'traefik.http.routers.app.tls.certresolver=letsencrypt'
-            - 'traefik.http.services.app.loadbalancer.server.port=80'
-        ports:
-            - '80:80'
-            - '443:443'
-        volumes:
-            - /var/run/docker.sock:/var/run/docker.sock
-            - letsencrypt:/letsencrypt
-        networks:
-            - laravel
-
 volumes:
     mysql_data:
     mongodb_data:
     storage:
-    letsencrypt:
 
 networks:
     laravel:
