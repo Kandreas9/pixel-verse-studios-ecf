@@ -13,23 +13,32 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $adminUser = User::factory()->create([
-            'name' => config('admin.username'),
-            'email' => config('admin.email'),
-            'password' => Hash::make(config('admin.password')),
-        ]);
+        $adminUser = User::updateOrCreate(
+            ['email' => config('admin.email')],
+            [
+                'name' => config('admin.username'),
+                'password' => Hash::make(config('admin.password')),
+            ]
+        );
+
         $adminUser->assignRole('Super-Admin');
 
-        // Not protecting the moderator and normal user like i do for the super admin seeder data since these are just for testing anyway
-        $moderatorUser = User::factory()->create([
-            'name' => 'Moderator',
-            'email' => 'moderator@example.com',
-        ]);
+        $moderatorUser = User::updateOrCreate(
+            ['email' => 'moderator@example.com'],
+            [
+                'name' => 'Moderator',
+                'password' => Hash::make('Moderatorpassword!2'),
+            ]
+        );
+
         $moderatorUser->assignRole('Moderator');
 
-        User::factory()->create([
-            'name' => 'Test',
-            'email' => 'user@example.com',
-        ]);
+        User::updateOrCreate(
+            ['email' => 'user@example.com'],
+            [
+                'name' => 'User',
+                'password' => Hash::make('Userpassword!2'),
+            ]
+        );
     }
 }

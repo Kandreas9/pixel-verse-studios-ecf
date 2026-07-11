@@ -35,7 +35,9 @@ RUN docker-php-ext-install \
     gd
 
 RUN apk add --no-cache --virtual .build-deps \
-    $PHPIZE_DEPS
+    $PHPIZE_DEPS \
+    openssl-dev \
+    cyrus-sasl-dev
 
 RUN pecl install mongodb \
     && docker-php-ext-enable mongodb
@@ -60,9 +62,6 @@ RUN npm i
 RUN npm run build
 
 RUN rm -rf node_modules
-
-# Cache Laravel config
-RUN php artisan optimize
 
 EXPOSE 9000
 CMD ["php-fpm"]
