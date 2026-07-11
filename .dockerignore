@@ -1,6 +1,10 @@
+.git
 node_modules
 vendor
-package-lock.json
-.git
-.gitignore
-storage/logs/*
+storage/logs
+.env
+.env.*
+Dockerfile
+docker-compose.yml
+npm-debug.log
+yarn-error.log
