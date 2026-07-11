@@ -17,7 +17,7 @@ Route::inertia('/privacy', 'legal/PrivacyPolicy');
 Route::get('/characters', [CharacterController::class, 'index']);
 Route::get('/characters/{character}', [CharacterController::class, 'show']);
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::inertia('/contact', 'Contact');
     Route::post('/contact', ContactController::class);
 
