@@ -50,7 +50,7 @@ export default function Edit({ character, items }) {
                                                 name="image"
                                             />
                                             <InputError
-                                                message={errors.name}
+                                                message={errors.image}
                                                 className="mt-2"
                                             />
                                         </div>

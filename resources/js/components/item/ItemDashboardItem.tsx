@@ -33,7 +33,7 @@ export default function ItemDashboardItem({ item }) {
         setProcessing(true);
 
         router.patch(
-            `/dashboard/items/${item.id}/${item.is_shared ? 'deactivate' : 'activate'}`,
+            `/dashboard/items/${item.id}/${item.is_active ? 'deactivate' : 'activate'}`,
             {},
             {
                 preserveScroll: true,
