@@ -14,9 +14,6 @@ Route::inertia('/', 'Homepage')->name('home');
 Route::inertia('/terms', 'legal/TermsOfService');
 Route::inertia('/privacy', 'legal/PrivacyPolicy');
 
-Route::get('/characters', [CharacterController::class, 'index']);
-Route::get('/characters/{character}', [CharacterController::class, 'show']);
-
 Route::middleware(['auth'])->group(function () {
     Route::inertia('/contact', 'Contact');
     Route::post('/contact', ContactController::class);
@@ -100,5 +97,8 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/comments/{comment}/ratings/{rating}', 'destroy');
     });
 });
+
+Route::get('/characters', [CharacterController::class, 'index']);
+Route::get('/characters/{character}', [CharacterController::class, 'show']);
 
 require __DIR__.'/settings.php';

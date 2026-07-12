@@ -63,5 +63,11 @@ RUN npm run build
 
 RUN rm -rf node_modules
 
+RUN mkdir -p /var/www/html/public/images
+
+RUN chown -R www-data:www-data /var/www/html/public/images
+
+RUN chmod -R 775 /var/www/html/public/images
+
 EXPOSE 9000
 CMD ["php-fpm"]

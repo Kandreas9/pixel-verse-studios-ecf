@@ -121,8 +121,12 @@ class CharacterController extends Controller
 
         // Find id for each item checked
         $checkedItemIds = [];
-        foreach ($request->input('items') as $key => $value) {
-            $checkedItemIds[] = Item::where('name', $key)->value('id');
+        foreach ($request->input('items', []) as $key => $value) {
+            $id = Item::where('name', $key)->value('id');
+
+            if ($id) {
+                $checkedItemIds[] = $id;
+            }
         }
 
         $character->items()->sync($checkedItemIds);
