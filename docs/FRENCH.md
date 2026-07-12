@@ -2,14 +2,17 @@
 
 Voici le projet finalisé pour l'évaluation ECF, portant sur la création d'un outil de création de personnages pour le MMORPG Fantasy Realm Online, développé par le studio Pixel Verse Studios.
 
-## Important Links
+## Liens importants
 
 - [English README](../README.md)
-- SQL Files instead of migrations
 - User Manual
 - Figma Designs
 - Project Management
 - Technical Docs
+
+- SQL Fichier
+
+> :warning: Le dossier `/docs/sql/` contient les fichiers SQL correspondant aux actions effectuées par mes fichiers de migration. Ces fichiers ne sont pas utilisés dans le projet, je les ai créés à des fins de démonstration. Je n'ai pas inclus les fichiers SQL pour les rôles, car cette partie est gérée par le package `spatie/laravel-permissions`. Toutefois, un exemple plus général impliquerait une table `roles` ainsi qu'une table pivot pour les utilisateurs et les rôles (puisqu'il s'agit d'une relation Many-to-Many), à l'instar des relations `character_item` ou `comment_rating` présentes dans le projet.
 
 ## Comment configurer le projet en local
 

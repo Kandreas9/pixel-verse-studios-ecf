@@ -1,0 +1,13 @@
+CREATE DATABASE IF NOT EXISTS pixelverse_mysql;
+USE pixelverse_mysql;
+
+CREATE TABLE ratings (
+    id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    is_liked BOOLEAN NOT NULL DEFAULT TRUE,
+    user_id BIGINT UNSIGNED NOT NULL,
+    created_at TIMESTAMP NULL DEFAULT NULL,
+    updated_at TIMESTAMP NULL DEFAULT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+        ON DELETE CASCADE
+);

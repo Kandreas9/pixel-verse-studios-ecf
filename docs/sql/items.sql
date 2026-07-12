@@ -1,0 +1,12 @@
+CREATE DATABASE IF NOT EXISTS pixelverse_mysql;
+USE pixelverse_mysql;
+
+CREATE TABLE items (
+    id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    type VARCHAR(50) NOT NULL,
+    is_active BOOLEAN NOT NULL DEFAULT FALSE,
+    created_at TIMESTAMP NULL DEFAULT NULL,
+    updated_at TIMESTAMP NULL DEFAULT NULL,
+    PRIMARY KEY (id)
+);

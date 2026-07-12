@@ -5,11 +5,14 @@ This is the completed project for the ecf assesment with the theme of a characte
 ## Important Links
 
 - [French README](docs/FRENCH.md)
-- SQL Files instead of migrations
 - User Manual
 - Figma Designs
 - Project Management
 - Technical Docs
+
+- SQL Files instead of migrations
+
+> :warning: `/docs/sql/` contains the sql files equivalent of what my migration files do. These files are not used for this project, i created them for demonstration purposes. I didnt include the roles sql files since those are handled by `spatie/laravel-permissions` package but a more general example would be a roles table and a pivot table for users and roles since its a Many-to-Many relationship, similar to the character_item or comment_rating relationships i have.
 
 ## How to Setup Project Locally
 
