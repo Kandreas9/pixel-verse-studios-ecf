@@ -4,11 +4,17 @@ Voici le projet finalisé pour l'évaluation ECF, portant sur la création d'un 
 
 ## Liens importants
 
+- [French README](docs/FRENCH.md)
+- User Manual - docs/manual
+- Figma Designs - docs/charte-graphique
+- Project Management - docs/gestion-de-project
+- Technical Docs - docs/documentation-technique
+
 - [English README](../README.md)
-- User Manual
-- Figma Designs
-- Project Management
-- Technical Docs
+- Manual - docs/manual
+- Charte Graphique - docs/charte-graphique
+- Gestion de Projet - docs/gestion-de-projet
+- Documentation Technique - docs/documentation-technique
 
 - SQL Fichier
 
