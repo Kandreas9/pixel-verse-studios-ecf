@@ -5,10 +5,10 @@ This is the completed project for the ecf assesment with the theme of a characte
 ## Important Links
 
 - [French README](docs/FRENCH.md)
-- User Manual
-- Figma Designs
-- Project Management
-- Technical Docs
+- User Manual - docs/manual
+- Figma Designs - docs/charte-graphique
+- Project Management - docs/gestion-de-project
+- Technical Docs - docs/documentation-technique
 
 - SQL Files instead of migrations
 
